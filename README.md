@@ -5,8 +5,8 @@ Explore **how a neural network learns** through an interactive browser-based cla
 ## What you can explore
 
 - Four reproducible synthetic datasets: **XOR**, circles, linearly separable points, and spirals.
-- A transparent **2-input → hidden layer → sigmoid output** feedforward neural network.
-- Change the hidden-layer width (2–16 neurons), **tanh/ReLU** activation and learning rate.
+- A transparent **2-input → 1–4 configurable hidden layers → sigmoid output** feedforward neural network. Each hidden layer can contain 2–16 neurons.
+- Add or remove hidden layers, change each layer's width (2–16 neurons), and experiment with **tanh/ReLU** activation and learning rate. Editing the architecture resets training.
 - Run, pause, reset, or advance training one full-batch gradient step at a time.
 - Watch a **decision-boundary heatmap** evolve and inspect loss and classification accuracy.
 - Inspect the mathematical foundations below; all computation runs locally in your browser.
@@ -76,7 +76,7 @@ The Vite base path is configured for GitHub Pages deployment at `/neural-network
 - `src/App.tsx` — training controls and canvas-based classifier visualization.
 - `src/nn.test.ts` — deterministic initialization, probability, training improvement and mutation-safety checks.
 
-**Current limitations:** One hidden layer; full-batch gradient descent only; CPU-only browser training; no independent validation dataset, regularization, momentum/Adam, or Web Worker yet. These are suitable next milestones.
+**Current limitations:** Up to four hidden layers; full-batch gradient descent only; CPU-only browser training; no independent validation dataset, regularization, momentum/Adam, or Web Worker yet. These are suitable next milestones.
 
 ## Recommended reading
 
@@ -85,3 +85,9 @@ The Vite base path is configured for GitHub Pages deployment at `/neural-network
 - [CS231n: Backpropagation, Intuitions](https://cs231n.github.io/optimization-2/)
 
 Independent educational application in the GLife family of mathematical projects.
+
+## Interactive architecture builder
+
+Use **Add layer** to append another hidden layer, **Remove** to delete a selected hidden layer, and each layer's slider to change its neuron count. The architecture preview shows `2 → h₁ → h₂ → … → 1`. Layers are initialized afresh after every architecture change, preventing mismatched weight dimensions or stale training history. Backpropagation traverses every configured hidden layer.
+
+Try the XOR dataset using `2 → 2 → 1`, then compare with `2 → 8 → 4 → 1`. Bigger networks are not guaranteed to learn faster or generalize better.
